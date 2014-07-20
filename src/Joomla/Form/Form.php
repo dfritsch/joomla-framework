@@ -735,6 +735,28 @@ class Form
 	}
 
 	/**
+	* Method to process the bound data and create an object for storing in the database
+	*
+	* The processSave function loops through the fields in this form and runs their
+	* processSave functions, ultimately combining all the final objects into one object.
+	*
+	* @return  mixed   Object of final values
+	*
+	* @since   1.1.0
+	*/
+	public function processSave() {
+		$return = new \stdClass;
+
+		foreach ($this->getFieldsets() as $fieldset) {
+			foreach ($this->getFieldset($fieldset->name) as $field) {
+				$return->{$field->name} = $field->processSave();
+			}
+		}
+
+		return $return;
+	}
+
+	/**
 	 * Method to load the form description from an XML file.
 	 *
 	 * The reset option works on a group basis. If the XML file references

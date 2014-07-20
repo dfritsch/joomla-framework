@@ -297,6 +297,10 @@ abstract class Field
 		return null;
 	}
 
+	public function processSave() {
+		return $this->value;
+	}
+
 	/**
 	 * Method to attach a Form object to the field.
 	 *
