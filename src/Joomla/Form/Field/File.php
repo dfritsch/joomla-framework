@@ -26,7 +26,7 @@ class Field_File extends Field
 	public $type = 'File';
 
 	public function processSave() {
-		if (!$this->value || !$this->value->name) {
+		if (!$this->value || !$this->value['name']) {
 			return null;
 		}
 
@@ -39,7 +39,7 @@ class Field_File extends Field
 	        !isset($value['error']) ||
 	        is_array($value['error'])
 	    ) {
-	        throw new \RuntimeException('Invalid parameters.');
+	        throw new \RuntimeException('Invalid file upload parameters.');
 	    }
 
 	    // Check $value['error'] value.
@@ -56,8 +56,8 @@ class Field_File extends Field
 	    }
 
 	    // You should also check filesize here.
-	    if ($value['size'] > 1000000) {
-	        throw new \RuntimeException('Exceeded filesize limit.');
+	    if ($value['size'] > 268435456) {
+	        throw new \RuntimeException('Exceeded arbitrary filesize limit.');
 	    }
 
 	    // DO NOT TRUST $value['mime'] VALUE !!
@@ -69,6 +69,7 @@ class Field_File extends Field
 	            'jpg' => 'image/jpeg',
 	            'png' => 'image/png',
 	            'gif' => 'image/gif',
+				'mp4' => 'video/mp4'
 	        ),
 	        true
 	    )) {

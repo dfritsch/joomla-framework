@@ -749,7 +749,14 @@ class Form
 
 		foreach ($this->getFieldsets() as $fieldset) {
 			foreach ($this->getFieldset($fieldset->name) as $field) {
-				$return->{$field->name} = $field->processSave();
+				if ($field->group) {
+					if (!isset($return->{$field->group})) {
+						$return->{$field->group} = new \stdClass;
+					}
+					$return->{$field->group}->{$field->fieldname} = $field->processSave();
+				} else {
+					$return->{$field->fieldname} = $field->processSave();
+				}
 			}
 		}
 
