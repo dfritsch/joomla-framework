@@ -62,19 +62,19 @@ class Field_File extends Field
 
 	    // DO NOT TRUST $value['mime'] VALUE !!
 	    // Check MIME Type by yourself.
-	    $finfo = new \finfo(FILEINFO_MIME_TYPE);
-	    if (false === $ext = array_search(
-	        $finfo->file($value['tmp_name']),
-	        array(
-	            'jpg' => 'image/jpeg',
-	            'png' => 'image/png',
-	            'gif' => 'image/gif',
-				'mp4' => 'video/mp4'
-	        ),
-	        true
-	    )) {
-	        throw new \RuntimeException('Invalid file format.');
-	    }
+	    // $finfo = new \finfo(FILEINFO_MIME_TYPE);
+	    // if (false === $ext = array_search(
+	    //     $finfo->file($value['tmp_name']),
+	    //     array(
+	    //         'jpg' => 'image/jpeg',
+	    //         'png' => 'image/png',
+	    //         'gif' => 'image/gif',
+		// 		'mp4' => 'video/mp4'
+	    //     ),
+	    //     true
+	    // )) {
+	    //     throw new \RuntimeException('Invalid file format.');
+	    // }
 
 		if (!file_exists($target_dir)) {
 			mkdir($target_dir);
