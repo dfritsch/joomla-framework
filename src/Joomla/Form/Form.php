@@ -750,10 +750,15 @@ class Form
 		foreach ($this->getFieldsets() as $fieldset) {
 			foreach ($this->getFieldset($fieldset->name) as $field) {
 				if ($field->group) {
-					if (!isset($return->{$field->group})) {
-						$return->{$field->group} = new \stdClass;
+					$groups = explode('.', $field->group);
+					$obj = &$return;
+					foreach ($groups as $group) {
+						if (!isset($obj->$group)) {
+							$obj->$group = new \stdClass;
+						}
+						$obj = &$obj->$group;
 					}
-					$return->{$field->group}->{$field->fieldname} = $field->processSave();
+					$obj->{$field->fieldname} = $field->processSave();
 				} else {
 					$return->{$field->fieldname} = $field->processSave();
 				}
