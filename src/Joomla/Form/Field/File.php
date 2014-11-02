@@ -80,7 +80,7 @@ class Field_File extends Field
 			mkdir($target_dir);
 		}
 
-		$ext = strtolower(pathinfo($file_obj['name'], PATHINFO_EXTENSION));
+		$ext = strtolower(pathinfo($value['name'], PATHINFO_EXTENSION));
 
 		$file_location = sprintf($target_dir.'/%s.%s',
 			sha1_file($value['tmp_name']),
